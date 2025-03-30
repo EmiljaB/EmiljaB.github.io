@@ -1,3 +1,199 @@
-
 <!DOCTYPE html>
-<!-- Full updated HTML content will be reinserted here. We can retrieve this from the document in context. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emilja Beneja | AI & Data Science Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0b0c2a;
+      color: #f0f0f0;
+    }
+    header {
+      background: #1b1d5d;
+      padding: 2rem;
+      text-align: center;
+    }
+    header img {
+      width: 120px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    nav {
+      text-align: center;
+      margin: 1rem 0;
+    }
+    nav a {
+      color: #8ecaff;
+      margin: 0 1rem;
+      text-decoration: none;
+    }
+    section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h2 {
+      border-bottom: 1px solid #333;
+      padding-bottom: 0.5rem;
+    }
+    .project, .experience, .volunteer, .education {
+      background: #1c1e46;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+    }
+    .project img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 0.5rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      background: #1b1d5d;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="images/profile.jpg" alt="Emilja Beneja">
+    <h1>Emilja Beneja</h1>
+    <p>AI & Data Science Enthusiast | Computer Engineering Graduate</p>
+  </header>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#resume">Resume</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#volunteer">Volunteering</a>
+    <a href="#acknowledgements">Acknowledgements</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I’m Emilja, a Computer Engineering graduate currently studying Applied AI at George Brown College in Toronto. My passion lies in using artificial intelligence to solve complex real-world problems — from healthcare diagnostics to mental health prediction. I have hands-on experience in data analytics, machine learning, and deep learning, with a growing focus on responsible AI. I’ve led and contributed to research-based projects involving medical image classification, RNA data analysis, and stress/depression assessment. With strong communication, leadership, and teamwork skills, I aim to make a meaningful impact in the field of AI and contribute to technologies that matter.</p>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="education">
+      <strong>Applied AI Solutions Development</strong><br>
+      George Brown College – Toronto, ON<br>
+      <em>September 2024 – Present</em>
+    </div>
+    <div class="education">
+      <strong>Bachelor of Computer Engineering, Graduated with Honors</strong><br>
+      Epoka University – Tirana, Albania<br>
+      <em>October 2021 – July 2024</em><br>
+      Thesis: “Detection of Brain Diseases from MRI and CT scans using Machine Learning Algorithms.”
+    </div>
+  </section>
+
+  <section id="resume">
+    <h2>Resume</h2>
+    <p><a href="Resume_EmiljaBeneja.pdf" target="_blank" style="color:#8ecaff;">Download Resume (PDF)</a></p>
+    <iframe src="Resume_EmiljaBeneja.pdf" width="100%" height="600px"></iframe>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+
+    <div class="project">
+      <h3>EnzymesClassification</h3>
+      <p>Classification of enzymes using Machine Learning and Deep Learning techniques to determine the best-performing models for complex biological data.</p>
+      <p><strong>Dataset:</strong> Privately owned, ~300 instances, 40 features, well-balanced across 6 enzyme types.</p>
+      <p><strong>Techniques:</strong> Feature Selection, SVM, KNN, Decision Trees, Random Forest, Logistic Regression, CNN, FCNN, MLP, RNN</p>
+      <p><strong>Result:</strong> FCNN achieved the best performance due to dataset complexity.</p>
+      <p><a href="https://github.com/EmiljaB/EnzymesClassification" target="_blank">View Code on GitHub</a></p>
+      <img src="images/enzymes.jpg" alt="Enzymes Project">
+    </div>
+
+    <div class="project">
+      <h3>Brain Disease Detection from MRI & CT</h3>
+      <p>Used ML and DL models to classify brain diseases like Alzheimer's, Meningitis, Stroke, and Tumors using CT/MRI scans.</p>
+      <p><strong>Techniques:</strong> Feature Extraction (LBP, GLCM), SVM, MLP, CNN, ResNet, UNET</p>
+      <p><strong>Result:</strong> Achieved over 90% accuracy. Visualizations and UNET masks included.</p>
+      <p><a href="https://github.com/EmiljaB/Brain_Diseases_Classification" target="_blank">View Code on GitHub</a></p>
+      <img src="images/brain.jpg" alt="Brain Project">
+    </div>
+
+    <div class="project">
+      <h3>Tumor Classification with RNA-Seq</h3>
+      <p>Classified tumor types using RNA-Seq gene expression data. Applied dimensionality reduction and classification.</p>
+      <p><strong>Techniques:</strong> PCA, t-SNE, UMAP + various classifiers</p>
+      <p><a href="https://github.com/EmiljaB/DataMining-Tumor_Classification" target="_blank">View Code on GitHub</a></p>
+      <img src="images/tumor.jpg" alt="Tumor Project">
+    </div>
+
+    <div class="project">
+      <h3>Mental Health Depression Prediction</h3>
+      <p>Developed a deep learning model to predict depression risk from a real-world mental health dataset (Kaggle comp).</p>
+      <p><strong>Features:</strong> Suicidal thoughts, pressure, sleep, family history, CGPA</p>
+      <p><strong>Result:</strong> TabNet model with 94% accuracy.</p>
+      <p><a href="https://github.com/fullestsky/Mental-Health-Analysis-Depression-Prediction-" target="_blank">View Code on GitHub</a></p>
+      <img src="images/mental_health.jpg" alt="Mental Health Project">
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Work Experience</h2>
+    <div class="experience">
+      <h3>IT Support Specialist – Balfin Group</h3>
+      <p>Worked with Dynamics NAV, assisted in database management and client-side support using MySQL.</p>
+    </div>
+    <div class="experience">
+      <h3>Teaching Assistant – alphaPlan</h3>
+      <p>Taught Python to high schoolers, coordinated lesson planning and supported a teaching team in delivering content.</p>
+    </div>
+    <div class="experience">
+      <h3>Part-time Associate – Shoppers Drug Mart</h3>
+      <p>Working part-time in Toronto since March 2025, contributing to store operations and customer service.</p>
+    </div>
+  </section>
+
+  <section id="volunteer">
+    <h2>Volunteer Experience</h2>
+    <div class="volunteer">
+      <h3>ICT Bootcamp – Code for Albania</h3>
+      <p>Mentored students in React Native and UX Design; organized events and assisted curriculum development.</p>
+    </div>
+    <div class="volunteer">
+      <h3>Red Cross Volunteer</h3>
+      <p>Led donation drives, supported elderly and mentally disabled individuals, and coordinated humanitarian activities.</p>
+    </div>
+  </section>
+
+  <section id="acknowledgements">
+    <h2>Acknowledgements</h2>
+    <div class="education">
+      <p><strong>Diploma:</strong> <a href="acknowledgements/Diploma.pdf" target="_blank">View Diploma (PDF)</a></p>
+      <p><strong>University Transcript (Epoka):</strong> <a href="acknowledgements/Epoka Transcript.pdf" target="_blank">View Transcript (PDF)</a></p>
+      <p><strong>Unofficial Transcript (George Brown):</strong> <a href="acknowledgements/Unofficial Transcript.pdf" target="_blank">View Transcript (PDF)</a></p>
+      <p><strong>Certificate:</strong> <a href="acknowledgements/Enterprise_Design_Thinking_Practitioner_Badge.pdf" target="_blank">Enterprise Design Thinking Practitioner</a></p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Phone: (416) 897-3409</p>
+    <p>Email: emiljabeneja11@gmail.com</p>
+    <p>GitHub: <a href="https://github.com/EmiljaB" target="_blank">github.com/EmiljaB</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/emilja-beneja-9526a922b/" target="_blank">linkedin.com/in/emilja-beneja</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Emilja Beneja. All rights reserved.</p>
+  </footer>
+</body>
+</html>
