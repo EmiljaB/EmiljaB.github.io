@@ -1,356 +1,631 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Emilja Beneja | AI Researcher & Developer</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Emilja Beneja — AI Researcher & Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f7f7f4;
+    --bg-raised: #ffffff;
+    --ink: #12151c;
+    --ink-soft: #4b5160;
+    --line: #dedcd3;
+    --teal: #2d6e63;
+    --teal-soft: #e4efec;
+    --cobalt: #2954e0;
+    --cobalt-soft: #e8edfc;
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #0b0c2a;
-      color: #f0f0f0;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+
+    --maxw: 1120px;
+    --ease: cubic-bezier(.16,.84,.32,1);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  a{ color: inherit; }
+
+  .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(247,247,244,0);
+    border-bottom: 1px solid rgba(222,220,211,0);
+    transition: background .35s var(--ease), border-color .35s var(--ease), backdrop-filter .35s var(--ease);
+  }
+  header.nav.scrolled{
+    background: rgba(247,247,244,.82);
+    border-bottom-color: var(--line);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+  }
+  .nav-inner{
+    max-width: var(--maxw); margin: 0 auto; padding: 16px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-mark{
+    font-family: var(--display); font-weight: 600; font-size: 17px;
+    letter-spacing: -0.01em; text-decoration: none;
+  }
+  .nav-links{ display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+  .nav-links a{
+    font-size: 13.5px; text-decoration: none; color: var(--ink-soft);
+    letter-spacing: .01em; position: relative; padding: 4px 0;
+    transition: color .2s var(--ease);
+  }
+  .nav-links a::after{
+    content:''; position: absolute; left: 0; right: 100%; bottom: -2px; height: 1.5px;
+    background: var(--teal); transition: right .28s var(--ease);
+  }
+  .nav-links a:hover{ color: var(--ink); }
+  .nav-links a:hover::after{ right: 0; }
+  .nav-toggle{ display: none; }
+
+  @media (max-width: 760px){
+    .nav-links{
+      position: fixed; top: 60px; left: 0; right: 0; background: var(--bg-raised);
+      flex-direction: column; gap: 0; border-bottom: 1px solid var(--line);
+      max-height: 0; overflow: hidden; transition: max-height .3s var(--ease);
     }
-
-    header {
-      background:
-        linear-gradient(rgba(11,12,42,0.75), rgba(11,12,42,0.75)),
-        url("images/neuralnet.jpg") center/cover no-repeat;
-      padding: 4rem 2rem;
-      text-align: center;
+    .nav-links.open{ max-height: 480px; }
+    .nav-links a{ padding: 14px 32px; display: block; border-top: 1px solid var(--line); }
+    .nav-toggle{
+      display: block; background: none; border: none; cursor: pointer;
+      width: 28px; height: 20px; position: relative;
     }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
+    .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after{
+      content:''; position: absolute; left: 0; right: 0; height: 2px; background: var(--ink);
     }
+    .nav-toggle span{ top: 9px; }
+    .nav-toggle span::before{ top: -8px; }
+    .nav-toggle span::after{ top: 8px; }
+  }
 
-    nav {
-      text-align: center;
-      margin: 1rem 0;
-    }
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 168px 0 96px;
+    position: relative;
+    overflow: hidden;
+  }
+  .eyebrow{
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--teal); margin: 0 0 22px; opacity: 0; transform: translateY(10px);
+    animation: rise .7s var(--ease) .1s forwards;
+  }
+  .hero h1{
+    font-family: var(--display); font-weight: 600; letter-spacing: -0.03em;
+    font-size: clamp(42px, 7.4vw, 92px); line-height: .98; margin: 0 0 26px;
+    opacity: 0; transform: translateY(16px); animation: rise .8s var(--ease) .22s forwards;
+  }
+  .hero h1 em{
+    font-style: normal; color: var(--teal);
+  }
+  .hero p.lede{
+    font-size: clamp(17px, 2vw, 20px); color: var(--ink-soft); max-width: 620px; margin: 0 0 40px;
+    opacity: 0; transform: translateY(14px); animation: rise .8s var(--ease) .36s forwards;
+  }
+  .hero-cta{
+    display: flex; gap: 14px; flex-wrap: wrap;
+    opacity: 0; transform: translateY(14px); animation: rise .8s var(--ease) .48s forwards;
+  }
+  .btn{
+    font-family: var(--body); font-weight: 600; font-size: 14.5px; text-decoration: none;
+    padding: 13px 24px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px;
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
+  }
+  .btn-primary{ background: var(--ink); color: var(--bg); }
+  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(18,21,28,.22); }
+  .btn-ghost{ background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .btn-ghost:hover{ transform: translateY(-2px); border-color: var(--ink); }
 
-    nav a {
-      color: #8ecaff;
-      margin: 0 1rem;
-      text-decoration: none;
-    }
+  @keyframes rise{ to{ opacity: 1; transform: translateY(0); } }
 
-    section {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
+  .signature{ width: 100%; height: auto; margin-top: 64px; display: block; }
+  .sig-node{ fill: var(--teal); }
+  .sig-net-line{ stroke: var(--ink-soft); stroke-opacity: .35; }
+  .sig-pulse{
+    stroke: var(--cobalt); stroke-width: 2.4; fill: none;
+    stroke-linecap: round; stroke-linejoin: round;
+    filter: drop-shadow(0 0 6px rgba(41,84,224,.35));
+  }
+  .sig-draw{
+    stroke-dasharray: 1600; stroke-dashoffset: 1600;
+    animation: draw 2.1s var(--ease) .5s forwards;
+  }
+  @keyframes draw{ to{ stroke-dashoffset: 0; } }
+  .sig-scan{
+    stroke-dasharray: 40 900; stroke-dashoffset: 0;
+    animation: scan 3.4s linear 2.6s infinite;
+  }
+  @keyframes scan{ to{ stroke-dashoffset: -940; } }
 
-    h2 {
-      border-bottom: 1px solid #333;
-      padding-bottom: 0.5rem;
-    }
-    .project a {
-  color: #8ecaff;
-  text-decoration: none;
-  font-weight: 500;
-}
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{ padding: 88px 0; border-top: 1px solid var(--line); }
+  section:first-of-type{ border-top: none; }
+  .section-head{ margin-bottom: 48px; }
+  .kicker{
+    font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--teal); display: block; margin-bottom: 14px;
+  }
+  h2.section-title{
+    font-family: var(--display); font-weight: 600; letter-spacing: -0.02em;
+    font-size: clamp(28px, 4vw, 42px); margin: 0; line-height: 1.05;
+  }
+  p.section-sub{ color: var(--ink-soft); max-width: 640px; margin: 16px 0 0; font-size: 16px; }
 
-  .project a:hover {
-  color: #b6ddff;
-  text-decoration: underline;
-}
+  .reveal{ opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+  .reveal.visible{ opacity: 1; transform: translateY(0); }
 
-    .project, .experience, .volunteer, .education {
-      background: #1c1e46;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 10px;
-    }
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: start; }
+  .about-grid p{ font-size: 17px; color: var(--ink-soft); margin: 0 0 16px; }
+  .about-stats{ display: grid; gap: 18px; }
+  .stat{
+    background: var(--bg-raised); border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px;
+  }
+  .stat .num{ font-family: var(--mono); font-size: 26px; color: var(--teal); display: block; margin-bottom: 4px; }
+  .stat .label{ font-size: 13.5px; color: var(--ink-soft); }
+  @media (max-width: 760px){ .about-grid{ grid-template-columns: 1fr; } }
 
-    .project img {
-      width: 100%;
-      border-radius: 10px;
-      margin-top: 0.5rem;
-    }
+  /* ---------- TIMELINE (education / experience) ---------- */
+  .timeline{ position: relative; padding-left: 28px; border-left: 1px solid var(--line); display: grid; gap: 36px; }
+  .t-item{ position: relative; }
+  .t-item::before{
+    content:''; position: absolute; left: -33px; top: 4px; width: 9px; height: 9px; border-radius: 50%;
+    background: var(--teal); box-shadow: 0 0 0 4px var(--teal-soft);
+  }
+  .t-role{ font-family: var(--display); font-weight: 600; font-size: 19px; margin: 0 0 2px; }
+  .t-org{ color: var(--teal); font-size: 14.5px; font-weight: 500; }
+  .t-meta{ font-family: var(--mono); font-size: 12.5px; color: var(--ink-soft); margin: 6px 0 10px; display: block; }
+  .t-desc{ color: var(--ink-soft); font-size: 15.5px; margin: 0; max-width: 640px; }
+  .t-thesis{ font-size: 14.5px; color: var(--ink-soft); font-style: italic; margin-top: 8px; }
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      background: #1b1d5d;
-      color: #888;
-    }
-    a {
-  color: #8ecaff;
-  text-decoration: none;
-}
+  /* ---------- CARDS (projects / publications / volunteer) ---------- */
+  .grid{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  @media (max-width: 760px){ .grid{ grid-template-columns: 1fr; } }
 
-a:hover {
-  color: #b6ddff;
-  text-decoration: underline;
-}
+  .card{
+    background: var(--bg-raised); border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+    display: flex; flex-direction: column;
+  }
+  .card:hover{ transform: translateY(-5px); box-shadow: 0 20px 40px rgba(18,21,28,.09); border-color: transparent; }
+  .card-media{ aspect-ratio: 16/9; overflow: hidden; background: var(--teal-soft); }
+  .card-media img{ width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s var(--ease); }
+  .card:hover .card-media img{ transform: scale(1.05); }
+  .card-body{ padding: 22px 24px 26px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .card-body h3{ font-family: var(--display); font-size: 18.5px; margin: 0; letter-spacing: -0.01em; }
+  .tag-row{ display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag{
+    font-family: var(--mono); font-size: 11px; letter-spacing: .02em; padding: 4px 10px;
+    background: var(--teal-soft); color: var(--teal); border-radius: 999px;
+  }
+  .card-body p{ font-size: 14.5px; color: var(--ink-soft); margin: 0; flex: 1; }
+  .card-link{
+    font-size: 14px; font-weight: 600; text-decoration: none; color: var(--cobalt);
+    display: inline-flex; align-items: center; gap: 6px; margin-top: 4px;
+  }
+  .card-link svg{ transition: transform .25s var(--ease); }
+  .card-link:hover svg{ transform: translate(3px,-3px); }
 
-  </style>
+  /* Publications specific */
+  .pub-card{
+    background: var(--bg-raised); border: 1px solid var(--line); border-radius: 18px; padding: 26px 28px;
+    display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: start;
+    transition: border-color .3s var(--ease), transform .3s var(--ease);
+  }
+  .pub-card:hover{ border-color: var(--teal); transform: translateX(4px); }
+  .pub-index{ font-family: var(--mono); font-size: 13px; color: var(--teal); padding-top: 3px; }
+  .pub-card h3{ font-family: var(--display); font-size: 18px; margin: 0 0 6px; letter-spacing: -.01em; }
+  .pub-card p{ color: var(--ink-soft); font-size: 14.5px; margin: 0 0 12px; }
+
+  /* ---------- RESUME ---------- */
+  .resume-panel{
+    background: var(--bg-raised); border: 1px solid var(--line); border-radius: 20px; padding: 32px;
+    display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px;
+  }
+  .resume-panel iframe{
+    width: 100%; height: 560px; border: 1px solid var(--line); border-radius: 14px; margin-top: 24px;
+    grid-column: 1 / -1;
+  }
+  @media (max-width: 620px){ .resume-panel{ grid-template-columns: 1fr; } }
+
+  /* ---------- VOLUNTEER ---------- */
+  .vol-list{ display: grid; gap: 18px; }
+  .vol-item{
+    display: grid; grid-template-columns: 1fr; gap: 4px; padding: 20px 0; border-bottom: 1px solid var(--line);
+  }
+  .vol-item:last-child{ border-bottom: none; }
+  .vol-item h3{ font-family: var(--display); font-size: 17px; margin: 0; }
+  .vol-item p{ color: var(--ink-soft); font-size: 14.5px; margin: 4px 0 0; max-width: 640px; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-panel{
+    background: var(--ink); color: var(--bg); border-radius: 24px; padding: 56px 48px;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 22px;
+  }
+  .contact-panel h2{ font-family: var(--display); font-size: clamp(28px,4vw,40px); margin: 0; letter-spacing: -.02em; }
+  .contact-links{ display: flex; gap: 16px; flex-wrap: wrap; }
+  .contact-links a{
+    text-decoration: none; padding: 12px 22px; border-radius: 999px; border: 1px solid rgba(247,247,244,.25);
+    font-size: 14.5px; font-weight: 500; transition: background .25s var(--ease), border-color .25s var(--ease);
+  }
+  .contact-links a:hover{ background: rgba(247,247,244,.1); border-color: rgba(247,247,244,.5); }
+  @media (max-width: 620px){ .contact-panel{ padding: 40px 28px; } }
+
+  footer{ text-align: center; padding: 32px; font-family: var(--mono); font-size: 12.5px; color: var(--ink-soft); }
+
+  .acks{ display: flex; gap: 14px; flex-wrap: wrap; }
+  .acks a{
+    text-decoration: none; font-size: 14.5px; padding: 10px 18px; border: 1px solid var(--line); border-radius: 999px;
+    transition: border-color .2s var(--ease), color .2s var(--ease);
+  }
+  .acks a:hover{ border-color: var(--teal); color: var(--teal); }
+</style>
 </head>
-
 <body>
 
-<header>
-  <h1>Emilja Beneja</h1>
-  <p>AI & Data Science Enthusiast | Computer Engineering Graduate</p>
+<header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-mark">Emilja Beneja</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
 </header>
 
-<nav>
-  <a href="#about">About</a>
-  <a href="#education">Education</a>
-  <a href="#experience">Experience</a>
-  <a href="#resume">Resume</a>
-  <a href="#projects">Projects</a>
-  <a href="#papers">Scholarly Work</a>
-  <a href="#volunteer">Volunteering</a>
-  <a href="#acknowledgements">Acknowledgements</a>
-  <a href="#contact">Contact</a>
-</nav>
+<main id="top">
 
-<section id="about">
-  <h2>About Me</h2>
- <p>
-  I am an AI Researcher and Developer currently pursuing Health Informatics at George Brown College,
-  with a background in Computer Engineering and Artificial Intelligence. My work focuses on applying
-  machine learning, generative AI, and intelligent agent systems to healthcare, clinical workflows,
-  and data-driven decision support. I enjoy building practical AI solutions that bridge technical
-  innovation with real-world business and healthcare needs.
-</p>
-</section>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">AI Research &amp; Development · Toronto, ON</span>
+      <h1>Building intelligent<br>systems for <em>healthcare.</em></h1>
+      <p class="lede">
+        I'm Emilja Beneja — an AI researcher and developer applying machine learning,
+        generative AI, and intelligent agent systems to clinical workflows and health
+        informatics. Computer Engineering graduate, currently deepening that work at
+        George Brown College.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View my work</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
 
-<section id="education">
-  <h2>Education</h2>
+      <svg class="signature" viewBox="0 0 1200 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path class="sig-net-line sig-draw" d="M0,140 L90,70 L180,160 L270,90 L360,150 L440,130" stroke-width="1.5"/>
+        <circle class="sig-node" cx="90" cy="70" r="4"/>
+        <circle class="sig-node" cx="180" cy="160" r="4"/>
+        <circle class="sig-node" cx="270" cy="90" r="4"/>
+        <circle class="sig-node" cx="360" cy="150" r="4"/>
+        <circle class="sig-node" cx="440" cy="130" r="4"/>
+        <path class="sig-pulse sig-draw" d="M440,130 L560,130 L595,130 L615,40 L640,205 L662,80 L684,130 L1200,130"/>
+        <path class="sig-pulse sig-scan" d="M440,130 L560,130 L595,130 L615,40 L640,205 L662,80 L684,130 L1200,130" opacity="0.9"/>
+      </svg>
+    </div>
+  </section>
 
-  <div class="education">
-    <strong>Health Informatics</strong><br>
-    George Brown College – Toronto, ON<br>
-    <em>September 2025 – Present</em>
-  </div>
+  <section id="about">
+    <div class="wrap reveal">
+      <div class="about-grid">
+        <div>
+          <span class="kicker">About</span>
+          <h2 class="section-title" style="margin-bottom:20px;">Where health informatics meets applied AI</h2>
+          <p>
+            I'm an AI Researcher and Developer currently pursuing Health Informatics at
+            George Brown College, building on a foundation in Computer Engineering and
+            Artificial Intelligence. My work centers on applying machine learning,
+            generative AI, and intelligent agent systems to healthcare, clinical
+            workflows, and data-driven decision support.
+          </p>
+          <p>
+            I enjoy building practical AI solutions that bridge technical innovation
+            with real-world business and healthcare needs — from diagnostic imaging
+            models to clinical decision support systems.
+          </p>
+        </div>
+        <div class="about-stats">
+          <div class="stat"><span class="num">3+</span><span class="label">ML/DL research projects in clinical domains</span></div>
+          <div class="stat"><span class="num">2</span><span class="label">Postgraduate programs in AI &amp; health informatics</span></div>
+          <div class="stat"><span class="num">Hons.</span><span class="label">B.Eng. Computer Engineering, Epoka University</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="education">
-    <strong>Applied AI Solutions Development</strong><br>
-    George Brown College – Toronto, ON<br>
-    <em>September 2024 – August 2025</em>
-  </div>
+  <section id="education">
+    <div class="wrap reveal">
+      <div class="section-head">
+        <span class="kicker">Education</span>
+        <h2 class="section-title">Academic background</h2>
+      </div>
+      <div class="timeline">
+        <div class="t-item">
+          <h3 class="t-role">Health Informatics</h3>
+          <span class="t-org">George Brown College — Toronto, ON</span>
+          <span class="t-meta">September 2025 – Present</span>
+        </div>
+        <div class="t-item">
+          <h3 class="t-role">Applied AI Solutions Development</h3>
+          <span class="t-org">George Brown College — Toronto, ON</span>
+          <span class="t-meta">September 2024 – August 2025</span>
+        </div>
+        <div class="t-item">
+          <h3 class="t-role">Bachelor of Computer Engineering, Graduated with Honors</h3>
+          <span class="t-org">Epoka University — Tirana, Albania</span>
+          <span class="t-meta">October 2021 – July 2024</span>
+          <p class="t-thesis">Thesis: Detection of Brain Diseases from MRI and CT Scans Using Machine Learning Algorithms</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="education">
-    <strong>Bachelor of Computer Engineering, Graduated with Honors</strong><br>
-    Epoka University – Tirana, Albania<br>
-    <em>October 2021 – July 2024</em><br>
-    Thesis: Detection of Brain Diseases from MRI and CT scans using Machine Learning Algorithms.
-  </div>
-</section>
+  <section id="experience">
+    <div class="wrap reveal">
+      <div class="section-head">
+        <span class="kicker">Experience</span>
+        <h2 class="section-title">Where I've worked</h2>
+      </div>
+      <div class="timeline">
+        <div class="t-item">
+          <h3 class="t-role">AI Researcher &amp; Developer</h3>
+          <span class="t-org">Eunoia Praxis — Toronto, ON</span>
+          <span class="t-meta">May 2026 – Present</span>
+          <p class="t-desc">Architecting and developing AI-powered solutions that improve efficiency across healthcare and clinical workflows. Designing intelligent agent systems, automating documentation processes, and researching applications of generative AI in healthcare environments.</p>
+        </div>
+        <div class="t-item">
+          <h3 class="t-role">AI / ML Engineering Intern (WIL)</h3>
+          <span class="t-org">Kinectrics — Toronto, ON</span>
+          <span class="t-meta">2025</span>
+          <p class="t-desc">Contributed to ROS-based field robot development for autonomous mapping, inspection, and data collection. Assisted with AI and computer vision integration for robotic systems.</p>
+        </div>
+        <div class="t-item">
+          <h3 class="t-role">Beauty Advisor</h3>
+          <span class="t-org">Shoppers Drug Mart — Toronto, ON</span>
+          <span class="t-meta">March 2025 – Present</span>
+          <p class="t-desc">Delivering personalized customer service and product recommendations while supporting merchandising, inventory, and day-to-day retail operations.</p>
+        </div>
+        <div class="t-item">
+          <h3 class="t-role">IT Support Specialist</h3>
+          <span class="t-org">Balfin Group</span>
+          <span class="t-meta">2023 – 2024</span>
+          <p class="t-desc">Provided enterprise IT support and troubleshooting for end users, and supported database management activities across the organization.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section id="experience">
-  <h2>Work Experience</h2>
+  <section id="publications">
+    <div class="wrap reveal">
+      <div class="section-head">
+        <span class="kicker">Publications</span>
+        <h2 class="section-title">Research &amp; scholarly work</h2>
+        <p class="section-sub">Academic papers and research projects spanning clinical decision support, digital health ethics, and systems design.</p>
+      </div>
+      <div style="display:grid; gap:16px;">
+        <div class="pub-card">
+          <span class="pub-index">01</span>
+          <div>
+            <h3>OVIS: PCOS Clinical Decision Support System (CDSS)</h3>
+            <p>Group research project designing a clinical decision support system for Polycystic Ovary Syndrome, covering health informatics workflows, stakeholder analysis, and requirements engineering.</p>
+            <a class="card-link" href="portfolio-papers/OVIS_PCOS-CDSS.pdf" target="_blank">Read the paper
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="pub-card">
+          <span class="pub-index">02</span>
+          <div>
+            <h3>Gambling Addiction in Digital Health</h3>
+            <p>Analytical paper examining gambling addiction as a mental health issue, with emphasis on digital health interventions, data-driven risk assessment, and ethical considerations.</p>
+            <a class="card-link" href="portfolio-papers/Scholarly-Paper_Gambling Addiction.pdf" target="_blank">Read the paper
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="pub-card">
+          <span class="pub-index">03</span>
+          <div>
+            <h3>Software Engineering Requirements Documentation</h3>
+            <p>Coverage of software engineering principles — design, analysis, implementation, and system requirements documentation.</p>
+            <a class="card-link" href="portfolio-papers/Requirements.pdf" target="_blank">Read the paper
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="pub-card">
+          <span class="pub-index">04</span>
+          <div>
+            <h3>Database Management Systems Project</h3>
+            <p>Academic project covering database design, normalization, and system requirements within a structured DBMS environment.</p>
+            <a class="card-link" href="portfolio-papers/DBMS_Project .pdf" target="_blank">Read the paper
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="experience">
-    <h3>AI Researcher & Developer – Eunoia Praxis</h3>
-    <p><em>May 2026 – Present | Toronto, ON</em></p>
-    <p>
-      Architect and develop AI-powered solutions that improve efficiency across
-      healthcare and clinical workflows. Design intelligent agent systems,
-      automate documentation processes, and research advanced applications of
-      Generative AI and machine learning in healthcare environments.
-    </p>
-  </div>
+  <section id="projects">
+    <div class="wrap reveal">
+      <div class="section-head">
+        <span class="kicker">Projects</span>
+        <h2 class="section-title">Applied machine learning</h2>
+        <p class="section-sub">Hands-on models spanning genomics, medical imaging, and behavioral health data.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-media"><img src="images/enzymes.jpg" alt="Enzymes Classification Project"></div>
+          <div class="card-body">
+            <h3>Enzymes Classification</h3>
+            <div class="tag-row"><span class="tag">SVM</span><span class="tag">KNN</span><span class="tag">Random Forest</span><span class="tag">CNN</span><span class="tag">RNN</span></div>
+            <p>Classification of enzymes using classical ML and deep learning techniques. FCNN achieved the best performance across all tested architectures.</p>
+            <a class="card-link" href="https://github.com/EmiljaB/EnzymesClassification" target="_blank">View on GitHub
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-media"><img src="images/tumor.jpg" alt="Tumor Classification Project"></div>
+          <div class="card-body">
+            <h3>Tumor Classification with RNA-Seq</h3>
+            <div class="tag-row"><span class="tag">RNA-Seq</span><span class="tag">Dimensionality Reduction</span></div>
+            <p>Tumor classification from RNA-sequencing data using dimensionality reduction techniques to isolate meaningful gene expression signals.</p>
+            <a class="card-link" href="https://github.com/EmiljaB/DataMining-Tumor_Classification" target="_blank">View on GitHub
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-media"><img src="images/Chest.jpg" alt="Chest X-Ray Classification Project"></div>
+          <div class="card-body">
+            <h3>Chest X-Ray Classification</h3>
+            <div class="tag-row"><span class="tag">CNN</span><span class="tag">Vision Transformer</span></div>
+            <p>Four-class chest X-ray classification using a hybrid CNN and Vision Transformer model for improved diagnostic accuracy.</p>
+            <a class="card-link" href="https://github.com/EmiljaB/Chest_X-Ray_Classification" target="_blank">View on GitHub
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-media"><img src="images/mental_health.jpg" alt="Mental Health Depression Prediction Project"></div>
+          <div class="card-body">
+            <h3>Mental Health Depression Prediction</h3>
+            <div class="tag-row"><span class="tag">Deep Learning</span><span class="tag">Behavioral Data</span></div>
+            <p>Deep learning model predicting depression risk from behavioral and demographic data, aimed at earlier screening support.</p>
+            <a class="card-link" href="https://github.com/fullestsky/Mental-Health-Analysis-Depression-Prediction-" target="_blank">View on GitHub
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="experience">
-    <h3>Beauty Advisor – Shoppers Drug Mart</h3>
-    <p><em>March 2025 – Present | Toronto, ON</em></p>
-    <p>
-      Deliver personalized customer service and product recommendations while
-      supporting retail operations. Collaborate with team members to maintain
-      merchandising standards, inventory organization, and a positive customer
-      experience in a fast-paced environment.
-    </p>
-  </div>
+  <section id="resume">
+    <div class="wrap reveal">
+      <div class="section-head">
+        <span class="kicker">Resume</span>
+        <h2 class="section-title">Full CV</h2>
+      </div>
+      <div class="resume-panel">
+        <div>
+          <p style="margin:0; color:var(--ink-soft); font-size:15px;">Download a copy or preview it below.</p>
+        </div>
+        <a href="EmiljaBeneja_Resume_UHN.pdf" target="_blank" class="btn btn-primary">Download résumé (PDF)</a>
+        <iframe src="Emilja_Beneja_Resume.pdf" title="Resume preview"></iframe>
+      </div>
+    </div>
+  </section>
 
-  <div class="experience">
-    <h3>AI / ML Engineering Intern (WIL) – Kinectrics</h3>
-    <p><em>2025 | Toronto, ON</em></p>
-    <p>
-      Contributed to ROS-based field robot development for autonomous mapping,
-      inspection, and data collection applications. Assisted with AI and
-      computer vision integration for robotic systems.
-    </p>
-  </div>
+  <section id="volunteer">
+    <div class="wrap reveal">
+      <div class="section-head">
+        <span class="kicker">Volunteering</span>
+        <h2 class="section-title">Community involvement</h2>
+      </div>
+      <div class="vol-list">
+        <div class="vol-item">
+          <h3>Digital Health Canada — eHealth2025 Toronto</h3>
+          <p>Supported the Digital Health Canada eHealth Conference in Toronto, assisting with event coordination, attendee engagement, and on-site support for digital health professionals and stakeholders.</p>
+        </div>
+        <div class="vol-item">
+          <h3>ICT Bootcamp — Code for Albania</h3>
+          <p>Mentored students in React Native development, UX design principles, and Python, and coordinated events for participants.</p>
+        </div>
+        <div class="vol-item">
+          <h3>Red Cross Volunteer</h3>
+          <p>Supported humanitarian activities and community donation drives.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="experience">
-    <h3>IT Support Specialist – Balfin Group</h3>
-    <p><em>2023 – 2024</em></p>
-    <p>
-      Provided enterprise IT support, troubleshooting, and technical assistance
-      for end users. Supported database management activities and helped
-      maintain reliable IT operations across the organization.
-    </p>
-  </div>
-</section>
-<section id="resume">
-  <h2>Resume</h2>
-  <p>
-    <a href="EmiljaBeneja_Resume_UHN.pdf" target="_blank" style="color:#8ecaff;">
-      Download Resume (PDF)
-    </a>
-  </p>
-  <iframe src="Emilja_Beneja_Resume.pdf" width="100%" height="600px"></iframe>
-</section>
+  <section id="acknowledgements">
+    <div class="wrap reveal">
+      <div class="section-head">
+        <span class="kicker">Acknowledgements</span>
+        <h2 class="section-title">Credentials</h2>
+      </div>
+      <div class="acks">
+        <a href="Diploma.pdf" target="_blank">Diploma</a>
+        <a href="Epoka Transcript.pdf" target="_blank">Epoka Transcript</a>
+        <a href="AI-Transcript.pdf" target="_blank">George Brown Transcript</a>
+      </div>
+    </div>
+  </section>
 
-<section id="projects">
-  <h2>Projects</h2>
+  <section id="contact">
+    <div class="wrap reveal">
+      <div class="contact-panel">
+        <span class="kicker" style="color:#9fd6c8;">Contact</span>
+        <h2>Let's build something that matters.</h2>
+        <div class="contact-links">
+          <a href="mailto:emiljabeneja11@gmail.com">emiljabeneja11@gmail.com</a>
+          <a href="https://github.com/EmiljaB" target="_blank">GitHub ↗</a>
+          <a href="https://www.linkedin.com/in/emilja-beneja-9526a922b/" target="_blank">LinkedIn ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="project">
-    <h3>EnzymesClassification</h3>
-    <p>Classification of enzymes using machine learning and deep learning techniques.</p>
-    <p><strong>Techniques:</strong> SVM, KNN, Random Forest, CNN, FCNN, RNN</p>
-    <p><strong>Result:</strong> FCNN achieved the best performance.</p>
-    <p>
-      <a href="https://github.com/EmiljaB/EnzymesClassification" target="_blank">
-        View Code on GitHub
-      </a>
-    </p>
-    <img src="images/enzymes.jpg" alt="Enzymes Classification Project">
-  </div>
+</main>
 
-  <div class="project">
-    <h3>Tumor Classification with RNA-Seq</h3>
-    <p>RNA-Seq tumor classification using dimensionality reduction techniques.</p>
-    <p>
-      <a href="https://github.com/EmiljaB/DataMining-Tumor_Classification" target="_blank">
-        View Code on GitHub
-      </a>
-    </p>
-    <img src="images/tumor.jpg" alt="Tumor Classification Project">
-  </div>
+<footer>&copy; 2026 Emilja Beneja — built &amp; hosted on GitHub Pages</footer>
 
-  <div class="project">
-    <h3>Chest X-Ray Classification</h3>
-    <p>Four-class chest X-ray classification using a hybrid CNN + Vision Transformer model.</p>
-    <p>
-      <a href="https://github.com/EmiljaB/Chest_X-Ray_Classification" target="_blank">
-        View Code on GitHub
-      </a>
-    </p>
-    <img src="images/Chest.jpg" alt="Chest X-Ray Project">
-  </div>
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 12);
+  }, { passive: true });
 
-  <div class="project">
-    <h3>Mental Health Depression Prediction</h3>
-    <p>Deep learning model for predicting depression risk from behavioral and demographic data.</p>
-    <p>
-      <a href="https://github.com/fullestsky/Mental-Health-Analysis-Depression-Prediction-" target="_blank">
-        View Code on GitHub
-      </a>
-    </p>
-    <img src="images/mental_health.jpg" alt="Mental Health Project">
-  </div>
-</section>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-<section id="papers">
-  <h2>Research & Academic Projects</h2>
-
-  <div class="project">
-    <h3>OVIS: PCOS Clinical Decision Support System (CDSS)</h3>
-    <p>
-      Academic group project focused on the design of a clinical decision support system
-      for Polycystic Ovary Syndrome (PCOS), incorporating health informatics workflows,
-      stakeholder analysis, and requirements engineering.
-    </p>
-    <p><strong>Focus:</strong> Health Informatics, CDSS, Clinical Workflows</p>
-    <p>
-      <a href="portfolio-papers/OVIS_PCOS-CDSS.pdf" target="_blank">
-        View Paper (PDF)
-      </a>
-    </p>
-  </div>
-
-  <div class="project">
-    <h3>Scholarly Paper: Gambling Addiction in Digital Health</h3>
-    <p>
-      Analytical paper examining gambling addiction as a mental health issue,
-      with emphasis on digital health interventions, data-driven risk assessment,
-      and ethical considerations.
-    </p>
-    <p><strong>Focus:</strong> Mental Health, Digital Health, Ethics</p>
-    <p>
-      <a href="portfolio-papers/Scholarly-Paper_Gambling Addiction.pdf" target="_blank">
-        View Paper (PDF)
-      </a>
-    </p>
-  </div>
-
-   <div class="project">
-    <h3>Software Engineering Requirements Documentation</h3>
-    <p>
-      Academic project covering software engineering principles design, analysis, implementation 
-      and system requirements documentation.
-    </p>
-    <p><strong>Focus:</strong> Database Design, Requirements Engineering</p>
-    <p>
-      <a href="portfolio-papers/Requirements.pdf" target="_blank">
-        View Paper (PDF)
-      </a>
-    </p>
-  </div>
-
-  <div class="project">
-    <h3>Database Management Systems Project</h3>
-    <p>
-      Academic project covering database design, normalization, and system requirements
-      within a structured DBMS environment.
-    </p>
-    <p><strong>Focus:</strong> Database Design, Requirements Engineering</p>
-    <p>
-      <a href="portfolio-papers/DBMS_Project .pdf" target="_blank">
-        View Paper (PDF)
-      </a>
-    </p>
-  </div>
-</section>
-
-<section id="volunteer">
-  <h2>Volunteer Experience</h2>
-
-  <div class="volunteer">
-    <h3>Digital Health Canada - eHealth2025 Toronto</h3>
-    <p>Supported volunteer at the Digital Health Canada e-Health Conference in Toronto, assisting with event coordination, attendee engagement, and on-site support for digital health professionals and stakeholders.</p>
-  </div>
-
-  <div class="volunteer">
-    <h3>ICT Bootcamp – Code for Albania</h3>
-    <p>Mentored students in React Native development, UX design principles, Python and coordinated events for participats.</p>
-  </div>
-
-  <div class="volunteer">
-    <h3>Red Cross Volunteer</h3>
-    <p>Supported humanitarian activities and community donation drives.</p>
-  </div>
-</section>
-
-<section id="acknowledgements">
-  <h2>Acknowledgements</h2>
-  <p><a href="Diploma.pdf" target="_blank">Diploma</a></p>
-  <p><a href="Epoka Transcript.pdf" target="_blank">Epoka Transcript</a></p>
-  <p><a href="AI-Transcript.pdf" target="_blank">George Brown Transcript</a></p>
-</section>
-
-<section id="contact">
-  <h2>Contact</h2>
-  <p>Email: emiljabeneja11@gmail.com</p>
-  <p>GitHub: <a href="https://github.com/EmiljaB" target="_blank">github.com/EmiljaB</a></p>
-  <p>LinkedIn:
-    <a href="https://www.linkedin.com/in/emilja-beneja-9526a922b/" target="_blank">
-      LinkedIn Profile
-    </a>
-  </p>
-</section>
-
-<footer>
-  <p>&copy; 2026 Emilja Beneja</p>
-</footer>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => io.observe(el));
+</script>
 
 </body>
 </html>
